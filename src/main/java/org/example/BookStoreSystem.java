@@ -73,9 +73,62 @@ public class BookStoreSystem {
                             System.out.println("Invalid option, try again.");
                     }
                 }
+            } else if (role.equals("user")) {
+                // Юзерский функционал
+                while (true) {
+                    System.out.print("Enter name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter surname: ");
+                    String surname = scanner.nextLine();
+
+                    Users user = new Users(name, surname);
+
+                    List<String> genres = BookStoreService.getGenres();
+                    System.out.println("\nAvailable genres: :");
+                    for (int i = 0; i < genres.size(); i++) {
+                        System.out.println((i + 1) + ". " + genres.get(i));
+                    }
+
+                    System.out.print("\nChoose an option: ");
+                    int genreChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    String selectedGenre = genres.get(genreChoice - 1);
+
+                    List<Book> books = BookStoreService.getBooksByGenre(selectedGenre);
+                    System.out.println("\nAvailable books:");
+                    for (int i = 0; i < books.size(); i++) {
+                        System.out.println((i + 1) + ". " + books.get(i).getTitle() + " (Author: " + books.get(i).getAuthor() + ")");
+                    }
+
+                    System.out.print("\nChoose an option: ");
+                    int bookChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    Book selectedBook = books.get(bookChoice - 1);
+
+                    System.out.println("\nYou have chosen: " + selectedBook.getTitle() + " (Author: " + selectedBook.getAuthor() + ")");
+                    System.out.println("Price: " + selectedBook.getPrice() + " tenge.");
+
+                    System.out.print("Do you want to purchase? (yes/no/menu): ");
+                    String decision = scanner.nextLine().toLowerCase();
+
+                    if (decision.equals("yes")) {
+                        System.out.println("\nThank you for your purchase, " + user.getFirstName() + "!");
+                        break;
+                    } else if (decision.equals("menu")) {
+                        System.out.println("\nReturning to the main menu...\n");
+                    } else {
+                        System.out.println("\nThank you for visiting!\n");
+                        break;
+                    }
+                }
+                scanner.close();
+            } else {
+                System.out.println("Invalid role. Exiting the system...");
+                scanner.close();
+                System.exit(0);
             }
-
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
