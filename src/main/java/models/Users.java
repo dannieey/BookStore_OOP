@@ -38,4 +38,21 @@ public class Users {
             e.printStackTrace();
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getBook() {
+        return book;
+    }
+
+
+    public String getFirstName() {
+        return name;
+    }
 }
