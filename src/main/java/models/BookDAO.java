@@ -65,5 +65,20 @@ public class BookDAO {
             e.printStackTrace();
         }
     }
+    public void deleteBook(int id) {
+        String sql = "DELETE FROM books_users WHERE id = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Book deleted successfully!");
+            } else {
+                System.out.println("Book not found.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
