@@ -26,4 +26,23 @@ public class BookDAO {
             e.printStackTrace();
         }
     }
+
+    public void viewBooks() {
+        String sql = "SELECT * FROM books_users";
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String title = resultSet.getString("title");
+                String author = resultSet.getString("author");
+                String genre = resultSet.getString("genre");
+                double price = resultSet.getDouble("price");
+
+                System.out.println("ID: " + id + "  |  Title: " + title + "  |  Author: " + author + "  |  Genre: " + genre + "  |  Price: " + price + " tenge.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
