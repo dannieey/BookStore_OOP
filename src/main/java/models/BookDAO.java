@@ -45,4 +45,25 @@ public class BookDAO {
             e.printStackTrace();
         }
     }
+
+    public void updateBook(int id, String newTitle, String newAuthor, String newGenre,double newPrice) {
+        String sql = "UPDATE books_users SET title = ?, author = ?,genre=?, price = ? WHERE id = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, newTitle);
+            statement.setString(2, newAuthor);
+            statement.setString(3,newGenre);
+            statement.setDouble(4, newPrice);
+            statement.setInt(5, id);
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Book updated successfully!");
+            } else {
+                System.out.println("Book not found.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
