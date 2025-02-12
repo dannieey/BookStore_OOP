@@ -13,7 +13,7 @@ public class DataBaseConnection {
 
     public static Connection getConnection() throws SQLException {
         try {
-            // Регистрируем драйвер вручную
+            
             Class.forName("org.postgresql.Driver");
 
             return DriverManager.getConnection(URL, USER, PASSWORD);
