@@ -14,7 +14,7 @@ public class BookStoreSystem {
             String role = scanner.nextLine().toLowerCase();
 
             if (role.equals("admin")) {
-
+                // Админский функционал
                 Connection connection = DataBaseConnection.getConnection();
                 BookDAO bookDAO = new BookDAO(connection);
 
@@ -74,6 +74,8 @@ public class BookStoreSystem {
                     }
                 }
             }
+
+
         }
     }
 }
